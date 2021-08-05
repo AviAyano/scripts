@@ -1,0 +1,35 @@
+import re
+def check_valid_input(letter_guessed, old_list):
+        regex = re.compile('[1234567890@_!#$%^&*()<>?/|\"}{~:]')
+        old_letters_guessed = list()
+        assert isinstance(old_list, object)
+        old_letters_guessed = old_list
+        old_letters_guessed.sort()
+
+        if (regex.search(letter_guessed) == None):
+            if len(letter_guessed) == 1:
+                correct_input = letter_guessed.lower()
+                if correct_input not in old_letters_guessed:
+                    old_letters_guessed += correct_input
+                    print("True")
+                else:
+                    print("X")
+                    print(*old_letters_guessed, sep=" -> ")
+                    print("False")
+            elif len(letter_guessed) > 1:
+                print("X")
+                print(*old_letters_guessed, sep=" -> ")
+                print("False")
+        else:
+            print("X")
+            print(*old_letters_guessed, sep=" -> ")
+            print("False - ")
+
+def main():
+        old_word = input("Please enter a word: \n")
+        old_list = list(old_word)
+        user_input = input("Please enter a letter: \n")
+        check_valid_input(user_input, old_list)
+
+if __name__ == "__main__":
+        main()
