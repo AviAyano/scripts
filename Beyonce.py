@@ -15,15 +15,6 @@ myButton = tk.Button(root, text="Look at the answer ...", command=show_pic)
 myButton.pack(side="top")
 w1.pack(side="top")
 
-'''def myClick():
-    myLable = Label(root, text="Look the answer ... " )
-    myLable.pack()
-    img=PhotoImage(file='answer.png')
-    Label(root,image=img)
-    Label.pack()'''
-
-
-
 
 root.mainloop()
 
