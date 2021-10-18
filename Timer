@@ -1,0 +1,81 @@
+class Timer:
+    def __init__( self, hours:int , minutes:int , seconds:int ):
+        self.hours = hours
+        self.minutes = minutes
+        self.seconds = seconds
+        
+    def add_zero(self,time):
+        num = time
+        if len(str(num)) == 1:
+            num = '0' + str(num)
+        return num
+        
+    def __str__(self):
+        h = self.add_zero(self.hours)
+        m = self.add_zero(self.minutes)
+        s = self.add_zero(self.seconds)
+        
+        return "{}:{}:{}".format(h,m,s, '.2f')
+        
+    def is_sixty(self,number):
+        if number % 60 == 0:
+            return True
+        else:
+            return False
+            
+    def is_twenty_four(self,number):
+        if number % 24 == 0:
+            return True
+        else:
+            return False
+        
+    def next_second(self):
+        next_sec = self.seconds + 1 
+        if self.is_sixty(next_sec):
+            next_min = self.minutes + 1
+            self.seconds = 0
+            if self.is_sixty(next_min):
+                next_hour = self.hours + 1
+                self.minutes = 0
+                self.seconds = 0
+                if self.is_twenty_four(next_hour):
+                    self.hours = 0
+                    self.minutes = 0
+                    self.seconds = 0
+                    
+                else:
+                    self.hours = next_hour 
+            else:
+                self.minutes = next_min
+                    
+        else:
+            self.seconds = next_sec
+            
+    def prev_second(self):
+        next_sec = self.seconds - 1 
+        if next_sec < 0:
+            next_min = self.minutes - 1
+            self.seconds = 59
+            if next_min < 0:
+                next_hour = self.hours - 1
+                self.minutes = 59
+                self.seconds = 59
+                if next_hour < 0:
+                    self.hours = 23
+                    self.minutes = 59
+                    self.seconds = 59
+                    
+                else:
+                    self.hours = next_hour
+            else:
+                self.minutes = next_min
+        else:
+            self.seconds = next_sec
+
+
+timer = Timer(23,59, 59)
+print(timer)
+timer.next_second()
+print(timer)
+timer.prev_second()
+print(timer)
